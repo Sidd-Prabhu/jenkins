@@ -1,14 +1,22 @@
 pipeline{
     agent any
+    parameters{
+        booleanParam(defaultValue: false, description: "Select your namespace", name: "namespace")
+    }
     stages{
         stage("Demo"){
             steps{
-               myFunc("World")
+                script{
+                    if(params.namespace== false)
+                    {
+                       echo "Your namespace is other............."
+                    }
+                    else
+                    {
+                        echo "Namespace is set as ${params.namespace}"
+                    }
+                }
             }
         }
     }
-}
-def myFunc(String myText)
-{
-    echo "Hello ${myText}"
 }
