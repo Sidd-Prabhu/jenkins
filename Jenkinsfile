@@ -1,12 +1,16 @@
 pipeline{
     agent any
     parameters{
-        booleanParam(defaultValue: false, description: "Enable sevice?", name: "myBoolean")
+        string(defaultValue: '', description: "Which choice?", name: "choiceParam")
+        choice(choices: ["EU-WEST-2A", "EU-WEST-2B", "EU-WEST-2C"], description: "Which AZ to deploy?", name: "deployEnv")
+        booleanParam(defaultValue: false, description: "Confirm?", name: "confirmParam")
     }
     stages{
-        stage("Demo"){
+        stage("Choice"){
             steps{
-                echo "booleanParam is set to: ${params.myBoolean}"
+                echo "String is as: ${choiceParam}\n"
+                echo "Choice is set as: ${deployEnv}\n"
+                echo "Bool is set as: ${confirmParam}"
             }
         }
     }
