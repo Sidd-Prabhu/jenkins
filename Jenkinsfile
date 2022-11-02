@@ -1,22 +1,27 @@
 pipeline{
     agent any
-    parameters{
-        booleanParam(defaultValue: false, description: "Select your namespace", name: "namespace")
-    }
     stages{
-        stage("Demo"){
+        stage("Build"){
             steps{
-                script{
-                    if(params.namespace== false)
-                    {
-                       echo "Your namespace is other............."
-                    }
-                    else
-                    {
-                        echo "Namespace is set as ${params.namespace}"
-                    }
-                }
+                echo "Build ID is ${BUILD_ID}\n"
+                echo "Build number is ${BUILD_NUMBER}\n"
             }
+        }
+        stage("Workspace"){
+            steps{
+                echo "Workspace Path : ${WORKSPACE}"
+            }
+        }
+    }
+     post {
+        always {
+            echo "Final Result is"
+        }
+        success{
+            echo "Success"
+        }
+        failure {
+            echo "Failed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         }
     }
 }
